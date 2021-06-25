@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const got = require('got');
 const cheerio = require('cheerio');
@@ -63,5 +63,9 @@ function createWindow () {
   app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
   })  
+
+  ipcMain.on('request-mainprocess-action', (event, arg) => {
+    console.log(arg)
+  })
 
 
